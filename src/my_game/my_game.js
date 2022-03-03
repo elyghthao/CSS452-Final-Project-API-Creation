@@ -9,13 +9,20 @@ class MyGame extends engine.Scene {
 
         // The camera to view the scene
         this.mCamera = null;
-
         this.mMsg = null;
-    
         this.kMinionSprite = "assets/minion_sprite.png";
         this.mMinion = null;
-
         this.mNewMinion = null;
+
+
+
+        this.mLineSet = [];
+        this.mCurrentLine = null;
+        this.mP1 = null;
+
+        this.mShowLine = true;
+
+        this.mCurrentLine = null;
     }
     load() {
         engine.texture.load(this.kMinionSprite);
@@ -31,18 +38,38 @@ class MyGame extends engine.Scene {
             100,                       // width of camera
             [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
         );
-        this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+        this.mCamera.setBackgroundColor([.8, .8, .8, 1]);
                 // sets the background to gray
     
         this.mMsg = new engine.FontRenderable("Status Message");
         this.mMsg.setColor([0, 0, 0, 1]);
-        this.mMsg.getXform().setPosition(-19, -8);
-        this.mMsg.setTextHeight(3);
+        this.mMsg.getXform().setPosition(-18, -5);
+        this.mMsg.setTextHeight(2.5);
+
+        this.mTopMsg = new engine.FontRenderable("Status Message");
+        this.mTopMsg.setColor([0, 0, 0, 1]);
+        this.mTopMsg.getXform().setPosition(-18, -2);
+        this.mTopMsg.setTextHeight(2.5);
 
 
-        this.mNewMinion = new FreezingMinion(this.kMinionSprite,-10,50,.2);
+        this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
-        this.mMinion = new Minion(this.kMinionSprite,-10,20,.2);
+        this.mMinion = new Minion(this.kMinionSprite,-15,0,.2);
+
+
+        
+        
+
+
+
+        this.mCurrentLine = new engine.LineRenderable();
+
+    }
+    makeLines() {
+        this.mCurrentLine.setFirstVertex(30, 30);
+        this.mCurrentLine.setPointSize(5.0);
+        this.mCurrentLine.setShowLine(true);
+        
     }
     
     
@@ -57,24 +84,38 @@ class MyGame extends engine.Scene {
     
         this.mCamera.setViewAndCameraMatrix();
         
-        this.mMsg.draw(this.mCamera);   // only draw status in the main camera
+        
         this._drawCamera(this.mCamera);
+        this.mMsg.draw(this.mCamera);   // only draw status in the main camera
+        this.mTopMsg.draw(this.mCamera);
+
+        let i, l;
+        for (i = 0; i < this.mLineSet.length; i++) {
+            l = this.mLineSet[i];
+            l.draw(this.mCamera);
+        }
         
     }
     
     // The Update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
     update () {
-       this.mMinion.update();
-       this.mNewMinion.update();
+        let msg = "";
+        let topmsg = "";
+
+        this.mMinion.update();
+        this.mNewMinion.update();
 
        if(engine.input.isKeyClicked(engine.input.keys.P)){
            this.mNewMinion.freezeState = !this.mNewMinion.freezeState;
-       }
-    //    if(engine.input.isKeyClicked(engine.input.keys.W)){
-    //     console.log("HIT W");
-    //     }   
-        this.mMsg.setText("HI");
+       } 
+       
+        msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo(); 
+        // console.log(this.mNewMinion.getKeysClickedInfo());
+        this.mMsg.setText(msg);
+
+        topmsg = "Minion is Paused: " + this.mNewMinion.freezeState;
+        this.mTopMsg.setText(topmsg);
     }
 }
 

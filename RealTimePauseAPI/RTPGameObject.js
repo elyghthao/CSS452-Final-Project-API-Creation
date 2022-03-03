@@ -67,7 +67,7 @@ class RTPGameObject extends engine.GameObject {
         this.keyClicked = true;
     }
     saveKeyClicked() {//this will run from update and save all keys clicked into the keyClickedInfo
-        console.log(this.keyClickedInfo);
+        // console.log(this.keyClickedInfo);
         if(engine.input.isKeyClicked(engine.input.keys.W)) {
             this.keyClickedInfo.push('w');
         }else if(engine.input.isKeyClicked(engine.input.keys.A)) {
@@ -80,7 +80,7 @@ class RTPGameObject extends engine.GameObject {
 
     }
     readKeyClicked() {//read the first key click and change the state to it
-        console.log("READ Key Clicked Info");
+        // console.log("READ Key Clicked Info");
         //check if keyClickedInfo is empty, if so, go back to update
         if(this.keyClickedInfo.length == 0) {
             this.currentState = 0;//this is normal update
@@ -91,7 +91,7 @@ class RTPGameObject extends engine.GameObject {
         
         for(let i = 0; i < this.states.length;i ++) {//compare first char with each states' id
             // console.log(infoID);
-            console.log(this.states[i].getID())
+            // console.log(this.states[i].getID())
             if(infoID == this.states[i].getID()) {//if the id's match, make the current state that state
                 this.currentState = i;
                 this.states[i].init();
@@ -128,6 +128,10 @@ class RTPGameObject extends engine.GameObject {
         }else if(this.keyPressed){
         }else if(this.keyCommand){
         }
+    }
+
+    getKeysClickedInfo() {
+        return this.keyClickedInfo;
     }
 
 }

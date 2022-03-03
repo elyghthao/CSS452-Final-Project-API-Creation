@@ -27,8 +27,7 @@ class RTPGameObjectState {
         return this.id;
     }
     start() {
-        this.super(init());
-        this.init();
+        
     }
     
 

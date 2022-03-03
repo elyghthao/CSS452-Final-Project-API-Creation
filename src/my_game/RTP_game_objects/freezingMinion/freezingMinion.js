@@ -38,7 +38,7 @@ class FreezingMinion extends RTPGameObject {
     
     animate() {
         let cd = performance.now();
-        console.log(this.animateObject);
+        // console.log(this.animateObject);
         if(this.animateObject) {
             if(cd-this.start > this.cooldown*1000) {
                 this.mRenderComponent.updateAnimation();
