@@ -95,7 +95,7 @@ export default {
     Renderable, TextureRenderable, SpriteRenderable, SpriteAnimateRenderable, FontRenderable, LineRenderable,
 
     // Game Objects
-    GameObject, GameObjectSet,
+    GameObject, GameObjectSet, 
 
     // constants
     eTexCoordArrayIndex, eAnimationType, eBoundCollideStatus,

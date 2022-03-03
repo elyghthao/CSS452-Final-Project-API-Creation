@@ -2,6 +2,7 @@
 
 import engine from "../engine/index.js";
 import Minion from "./objects/minion.js";
+import FreezingMinion from "./RTP_game_objects/freezingMinion/freezingMinion.js";
 class MyGame extends engine.Scene {
     constructor() {
         super();
@@ -13,6 +14,8 @@ class MyGame extends engine.Scene {
     
         this.kMinionSprite = "assets/minion_sprite.png";
         this.mMinion = null;
+
+        this.mNewMinion = null;
     }
     load() {
         engine.texture.load(this.kMinionSprite);
@@ -36,6 +39,9 @@ class MyGame extends engine.Scene {
         this.mMsg.getXform().setPosition(-19, -8);
         this.mMsg.setTextHeight(3);
 
+
+        this.mNewMinion = new FreezingMinion(this.kMinionSprite,-10,50,.2);
+        this.mNewMinion.processKeyClicked();
         this.mMinion = new Minion(this.kMinionSprite,-10,20,.2);
     }
     
@@ -43,6 +49,7 @@ class MyGame extends engine.Scene {
     _drawCamera(camera) {
         camera.setViewAndCameraMatrix();
         this.mMinion.draw(camera);
+        this.mNewMinion.draw(camera);
     }
     draw() {
         // Step A: clear the canvas
@@ -59,6 +66,14 @@ class MyGame extends engine.Scene {
     // anything from this function!
     update () {
        this.mMinion.update();
+       this.mNewMinion.update();
+
+       if(engine.input.isKeyClicked(engine.input.keys.P)){
+           this.mNewMinion.freezeState = !this.mNewMinion.freezeState;
+       }
+    //    if(engine.input.isKeyClicked(engine.input.keys.W)){
+    //     console.log("HIT W");
+    //     }   
         this.mMsg.setText("HI");
     }
 }

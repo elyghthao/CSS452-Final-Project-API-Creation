@@ -6,23 +6,34 @@ const kAbstractMethodError = new Error("Abstract Method")
 
 
 class RTPGameObjectState {
-    constructor(isFreeze = false) {
-        this.isFreeze = isFreeze;       //this is true if this state is a freeze state
+    constructor(mRenderComponent) {
+        this.isFreeze = false;       //this is true if this state is a freeze state
         this.timeDuration = -1;         //duration of state, is negative one if doesnt apply
         this.isDone = false;
         this.id = "";
+        this.mRenderComponent = mRenderComponent;
     }
-    init(){
+    init(){//set id in init
+        this.isDone = false;
     }
 
     update() {
     }
 
     pop() {
-
+        this.isDone = true;
     }
+    getID() {
+        return this.id;
+    }
+    start() {
+        this.super(init());
+        this.init();
+    }
+    
 
 
 
 
 }
+export default RTPGameObjectState;
