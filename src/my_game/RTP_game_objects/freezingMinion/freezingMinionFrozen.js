@@ -4,7 +4,7 @@ import RTPGameObjectState from "../../../../RealTimePauseAPI/RTPGameObjectState.
 class MinionFrozen extends RTPGameObjectState {
     constructor(mRenderComponent) {
         super(mRenderComponent);
-        this.animateObject = false;
+        this.animateObject = false; //STOP ANIMATION
     }
 
     init() {

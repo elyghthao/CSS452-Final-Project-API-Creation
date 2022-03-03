@@ -36,7 +36,7 @@ class MyGame extends engine.Scene {
         this.mCamera = new engine.Camera(
             vec2.fromValues(30, 30), // position of the camera
             100,                       // width of camera
-            [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+            [0, 0, 960, 720]           // viewport (orgX, orgY, width, height)
         );
         this.mCamera.setBackgroundColor([.8, .8, .8, 1]);
                 // sets the background to gray
@@ -54,21 +54,59 @@ class MyGame extends engine.Scene {
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
+
+
+        
         this.mMinion = new Minion(this.kMinionSprite,-15,0,.2);
 
-
-        
-        
-
-
-
-        this.mCurrentLine = new engine.LineRenderable();
-
+        this.makeLines();
     }
+
+
     makeLines() {
-        this.mCurrentLine.setFirstVertex(30, 30);
+        this.mCurrentLine = new engine.LineRenderable();
+        this.mCurrentLine.setFirstVertex(-20,54);
         this.mCurrentLine.setPointSize(5.0);
         this.mCurrentLine.setShowLine(true);
+        this.mCurrentLine.setSecondVertex(0,54);
+        this.mLineSet.push(this.mCurrentLine);
+
+        this.mCurrentLine = new engine.LineRenderable();
+        this.mCurrentLine.setFirstVertex(0,54);
+        this.mCurrentLine.setPointSize(5.0);
+        this.mCurrentLine.setShowLine(true);
+        this.mCurrentLine.setSecondVertex(0,45);
+        this.mLineSet.push(this.mCurrentLine);
+
+        this.mCurrentLine = new engine.LineRenderable();
+        this.mCurrentLine.setFirstVertex(0,45);
+        this.mCurrentLine.setPointSize(5.0);
+        this.mCurrentLine.setShowLine(true);
+        this.mCurrentLine.setSecondVertex(23,45);
+        this.mLineSet.push(this.mCurrentLine);
+
+        this.mCurrentLine = new engine.LineRenderable();
+        this.mCurrentLine.setFirstVertex(12,55);
+        this.mCurrentLine.setPointSize(5.0);
+        this.mCurrentLine.setShowLine(true);
+        this.mCurrentLine.setSecondVertex(12,70);
+        this.mLineSet.push(this.mCurrentLine);
+
+        this.mCurrentLine = new engine.LineRenderable();
+        this.mCurrentLine.setFirstVertex(23,54);
+        this.mCurrentLine.setPointSize(5.0);
+        this.mCurrentLine.setShowLine(true);
+        this.mCurrentLine.setSecondVertex(23,45);
+        this.mLineSet.push(this.mCurrentLine);
+        
+        this.mCurrentLine = new engine.LineRenderable();
+        this.mCurrentLine.setFirstVertex(80,54);
+        this.mCurrentLine.setPointSize(5.0);
+        this.mCurrentLine.setShowLine(true);
+        this.mCurrentLine.setSecondVertex(23,54);
+        this.mLineSet.push(this.mCurrentLine);
+
+        
         
     }
     
