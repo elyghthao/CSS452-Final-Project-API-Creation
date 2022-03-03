@@ -23,8 +23,7 @@ class FreezingMinion extends RTPGameObject {
             0);   
         this.cooldown = cooldown;
         this.name = "Freezing Minion";
-
-        //load in the states here
+        //load in the states here ********IMPORTANT***************
         this.states.push(new MinionUpdate(this.mRenderComponent));
         this.states.push(new MinionFrozen(this.mRenderComponent));
         this.states.push(new MoveUp(this.mRenderComponent,0.5,10,"w"));
@@ -34,8 +33,6 @@ class FreezingMinion extends RTPGameObject {
         // console.log(this.mRenderComponent.getXform().getPosition());
         
     }
-
-    
     animate() {
         let cd = performance.now();
         // console.log(this.animateObject);
@@ -49,5 +46,4 @@ class FreezingMinion extends RTPGameObject {
         
     }
 }
-
 export default FreezingMinion;

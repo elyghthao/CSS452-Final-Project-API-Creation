@@ -20,7 +20,6 @@ class MinionUpdate extends RTPGameObjectState {
         //go right
         let xForm = this.mRenderComponent.getXform();
         // xForm.incXPosBy(.05);
-        // console.log(this.mRenderComponent.)
 
 
 
