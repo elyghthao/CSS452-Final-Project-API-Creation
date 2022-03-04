@@ -16,7 +16,7 @@ class MinionUpdate extends RTPGameObjectState {
     }
     update() {
         this.animateObject = true;
-        console.log("in freezing minion update");
+        // console.log("in freezing minion update");
         //go right
         let xForm = this.mRenderComponent.getXform();
         // xForm.incXPosBy(.05);

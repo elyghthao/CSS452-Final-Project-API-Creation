@@ -150,6 +150,7 @@ class MyGame extends engine.Scene {
         this.mMinion.update();
         this.mNewMinion.update();
         this.mNewHero.update();
+        // console.log(this.mNewHero.getKeysClickedInfo());
 
        if(engine.input.isKeyClicked(engine.input.keys.P)){
            this.mNewMinion.freezeState = !this.mNewMinion.freezeState;

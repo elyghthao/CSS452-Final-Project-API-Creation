@@ -76,8 +76,26 @@ class RTPGameObject extends engine.GameObject {
             this.keyClickedInfo.push('s');
         }else if(engine.input.isKeyClicked(engine.input.keys.D)) {
             this.keyClickedInfo.push('d');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Zero)){
+            this.keyClickedInfo.push('0');
         }else if(engine.input.isKeyClicked(engine.input.keys.One)) {
             this.keyClickedInfo.push('1');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Two)){
+            this.keyClickedInfo.push('2');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Three)){
+            this.keyClickedInfo.push('3');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Four)){
+            this.keyClickedInfo.push('4');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Five)){
+            this.keyClickedInfo.push('5');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Six)){
+            this.keyClickedInfo.push('6');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Seven)){
+            this.keyClickedInfo.push('7');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Eight)){
+            this.keyClickedInfo.push('8');
+        }else if(engine.input.isKeyClicked(engine.input.keys.Nine)){
+            this.keyClickedInfo.push('9');
         }
 
     }

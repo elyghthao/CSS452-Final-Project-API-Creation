@@ -25,6 +25,7 @@ class HeroUpdate extends RTPGameObjectState {
 
         
         this.heroChangeSize();
+        this.mRenderComponent.setColor([1,1,1,0]);
         
         
         

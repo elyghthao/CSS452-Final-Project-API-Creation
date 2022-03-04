@@ -21,13 +21,17 @@ class MoveToPoint extends RTPGameObjectState {
     init() {
         this.isDone = false;
         let xForm = this.mRenderComponent.getXform();
-        this.interpolateX = new engine.Lerp(this.mRenderComponent.getXform().getXPos(), 120, this.speed);
-        this.interpolateY = new engine.Lerp(this.mRenderComponent.getXform().getYPos(), 120, this.speed);
+        this.interpolateX = new engine.Lerp(this.mRenderComponent.getXform().getXPos(), 3, this.speed);
+        this.interpolateY = new engine.Lerp(this.mRenderComponent.getXform().getYPos(), 3, this.speed);
         
     }
     update() {
+
+
+        this.mRenderComponent.setColor([1,0,0,1]);
         //moves to a point
         let xForm = this.mRenderComponent.getXform();
+        // console.log("MOVING TO: " + this.point);
 
         let x,y;
         x = this.point[0];
@@ -41,10 +45,18 @@ class MoveToPoint extends RTPGameObjectState {
         this.interpolateY.update();
         xForm.setYPos(this.interpolateY.get());
 
-        
-        if(xForm.getPosition()[0] == this.point[0] && xForm.getPosition == this.point[1]) {
+        // console.log(xForm.getPosition()[0]);
+        if(Math.abs(xForm.getPosition()[0]- this.point[0]) < .5 &&
+            Math.abs(xForm.getPosition()[1] - this.point[1]) < .5) {
+            // console.log("POP");
             this.pop();
+            
         }
+    }
+
+    pop(){
+        super.pop();
+        
     }
 
 }

@@ -16,8 +16,8 @@ class MinionFrozen extends RTPGameObjectState {
     }
     update() {
         //does nothing
-        console.log("in freezing minion frozen");
-        
+        // console.log("in freezing minion frozen");
+        this.animateObject = false;
 
 
     }

@@ -22,7 +22,10 @@ class FreezingHero extends RTPGameObject {
 
             this.states.push(new HeroUpdate(this.mRenderComponent));
             this.states.push(new HeroFrozen(this.mRenderComponent));
-            this.states.push(new MoveToPoint(this.mRenderComponent, .05, [30,30], "1"));
+            this.states.push(new MoveToPoint(this.mRenderComponent, .1, [30,30], "1"));
+            this.states.push(new MoveToPoint(this.mRenderComponent, .1, [40,20], "2"));
+            this.states.push(new MoveToPoint(this.mRenderComponent, .1, [40,60], "3"));
+            this.states.push(new MoveToPoint(this.mRenderComponent, .1, [23,0], "4"));
 
 
             
