@@ -20,8 +20,10 @@ class MoveDown extends RTPGameObjectState {
         this.finalY = xForm.getPosition()[1] - this.distance;
     }
     update() {
+
+        
         //moves up for a certain duration
-        console.log("in MoveDown");
+        // console.log("in MoveDown");
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incYPosBy(-this.speed);

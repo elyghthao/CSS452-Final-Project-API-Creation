@@ -23,9 +23,12 @@ class Minion extends engine.GameObject {
 
     update() {
         let xForm = this.mRenderComponent.getXform();
-        xForm.incXPosBy(.05);
+        xForm.incXPosBy(0.05);
         this.animate();
         // xForm.incXPosBy(.005);
+        if(this.mRenderComponent.getXform().getPosition()[0] > 80) {
+            xForm.setPosition(-20,xForm.getPosition()[1]);
+        }
         
     }
 

@@ -21,7 +21,7 @@ class MoveRight extends RTPGameObjectState {
     }
     update() {
         //moves up for a certain duration
-        console.log("in MoveRight");
+        // console.log("in MoveRight");
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incXPosBy(this.speed);

@@ -159,10 +159,11 @@ class MyGame extends engine.Scene {
        
         msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo(); 
         // console.log(this.mNewMinion.getKeysClickedInfo());
-        this.mMsg.setText(msg);
+        
 
-        topmsg = "Minion is Paused: " + this.mNewMinion.freezeState;
-        this.mTopMsg.setText(topmsg);
+        topmsg = "Pause State: " + this.mNewMinion.freezeState;
+        this.mMsg.setText(topmsg);
+        this.mTopMsg.setText(msg);
     }
 }
 

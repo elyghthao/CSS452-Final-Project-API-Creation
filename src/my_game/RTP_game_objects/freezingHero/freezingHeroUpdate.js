@@ -18,7 +18,7 @@ class HeroUpdate extends RTPGameObjectState {
     }
     update() {
         this.animateObject = true;
-        console.log("in freezing Hero: update");
+        // console.log("in freezing Hero: update");
         //go right
         let xForm = this.mRenderComponent.getXform();
         // xForm.incXPosBy(.05);

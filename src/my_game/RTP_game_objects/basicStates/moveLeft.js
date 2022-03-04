@@ -21,7 +21,7 @@ class MoveLeft extends RTPGameObjectState {
     }
     update() {
         //moves up for a certain duration
-        console.log("in MoveLeft");
+        // console.log("in MoveLeft");
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incXPosBy(-this.speed);
