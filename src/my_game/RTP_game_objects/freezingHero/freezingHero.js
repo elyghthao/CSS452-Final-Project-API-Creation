@@ -21,9 +21,7 @@ class FreezingHero extends RTPGameObject {
             150, 164,   // width x height in pixels
             0,          // number of elements in this sequence
             0); 
-
             this.name = "freezing hero";
-
             this.states.push(new HeroUpdate(this.mRenderComponent));
             this.states.push(new HeroFrozen(this.mRenderComponent));
             this.states.push(new MoveToPoint(this.mRenderComponent, .1, [30,30], "1"));
@@ -35,13 +33,8 @@ class FreezingHero extends RTPGameObject {
             this.states.push(new MoveUp(this.mRenderComponent,0.5,10,"w"));
             this.states.push(new MoveDown(this.mRenderComponent,0.5,10,"s"));
             this.states.push(new MoveRight(this.mRenderComponent,0.5,10,"d"));
-            this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"a"));
-
-
-            
+            this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"a"));  
     }
-
-
 }
 
 export default FreezingHero;

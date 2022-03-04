@@ -25,7 +25,7 @@ class MoveRight extends RTPGameObjectState {
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incXPosBy(this.speed);
-        if(xForm.getPosition()[0] > this.finalX) {
+        if(xForm.getPosition()[0] >= this.finalX) {
             this.pop();
         }
     }
