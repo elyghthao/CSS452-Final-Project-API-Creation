@@ -16,7 +16,7 @@ class HeroFrozen extends RTPGameObjectState {
     }
     update() {
         //does nothing
-        console.log("in freezing hero: frozen");
+        // console.log("in freezing hero: frozen");
         this.animateObject = false;
 
 

@@ -33,7 +33,7 @@ class FreezingHero extends RTPGameObject {
             this.states.push(new MoveUp(this.mRenderComponent,0.5,10,"w"));
             this.states.push(new MoveDown(this.mRenderComponent,0.5,10,"s"));
             this.states.push(new MoveRight(this.mRenderComponent,0.5,10,"d"));
-            this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"a"));  
+            this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"a")); 
     }
 }
 

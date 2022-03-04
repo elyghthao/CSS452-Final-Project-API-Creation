@@ -1,10 +1,6 @@
 "use strict";
 
 
-const kAbstractClassError = new Error("Abstract Class")
-const kAbstractMethodError = new Error("Abstract Method")
-
-
 class RTPGameObjectState {
     constructor(mRenderComponent) {
         this.isFreeze = false;       //this is true if this state is a freeze state

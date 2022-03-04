@@ -58,6 +58,26 @@ class MyGame extends engine.Scene {
         this.mHeroMsg.getXform().setPosition(-18, -5);
         this.mHeroMsg.setTextHeight(2);
 
+        this.mOne = new engine.FontRenderable("Status Message");
+        this.mOne.setColor([1, 0, 0, 1]);
+        this.mOne.getXform().setPosition(30, 30);
+        this.mOne.setTextHeight(2);
+
+        this.mTwo = new engine.FontRenderable("Status Message");
+        this.mTwo.setColor([1, 0, 0, 1]);
+        this.mTwo.getXform().setPosition(40, 20);
+        this.mTwo.setTextHeight(2);
+
+        this.mThree = new engine.FontRenderable("Status Message");
+        this.mThree.setColor([1, 0, 0, 1]);
+        this.mThree.getXform().setPosition(40, 60);
+        this.mThree.setTextHeight(2);
+
+        this.mFour = new engine.FontRenderable("Status Message");
+        this.mFour.setColor([1, 0, 0, 1]);
+        this.mFour.getXform().setPosition(23, 0);
+        this.mFour.setTextHeight(2);
+
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
@@ -138,6 +158,12 @@ class MyGame extends engine.Scene {
         this.mHeroMsg.draw(this.mCamera);
         this.mMsg.draw(this.mCamera);   // only draw status in the main camera
         this.mTopMsg.draw(this.mCamera);
+        this.mOne.draw(this.mCamera);
+        this.mTwo.draw(this.mCamera);
+        this.mThree.draw(this.mCamera);
+        this.mFour.draw(this.mCamera);
+
+        
 
         let i, l;
         for (i = 0; i < this.mLineSet.length; i++) {
@@ -174,6 +200,10 @@ class MyGame extends engine.Scene {
         this.mHeroMsg.setText(heromsg);
         this.mMsg.setText(topmsg);
         this.mTopMsg.setText(msg);
+        this.mOne.setText("1");
+        this.mTwo.setText("2");
+        this.mThree.setText("3");
+        this.mFour.setText("4");
     }
 }
 
