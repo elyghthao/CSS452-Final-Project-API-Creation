@@ -2,6 +2,7 @@
 
 import engine from "../engine/index.js";
 import Minion from "./objects/minion.js";
+import FreezingHero from "./RTP_game_objects/freezingHero/freezingHero.js";
 import FreezingMinion from "./RTP_game_objects/freezingMinion/freezingMinion.js";
 class MyGame extends engine.Scene {
     constructor() {
@@ -13,6 +14,7 @@ class MyGame extends engine.Scene {
         this.kMinionSprite = "assets/minion_sprite.png";
         this.mMinion = null;
         this.mNewMinion = null;
+        this.mNewHero = null;
 
 
 
@@ -54,6 +56,9 @@ class MyGame extends engine.Scene {
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
+
+        this.mNewHero = new FreezingHero(this.kMinionSprite,-15,25);
+        this.mNewHero.processKeyClicked();
 
 
         
@@ -115,6 +120,7 @@ class MyGame extends engine.Scene {
         camera.setViewAndCameraMatrix();
         this.mMinion.draw(camera);
         this.mNewMinion.draw(camera);
+        this.mNewHero.draw(camera);
     }
     draw() {
         // Step A: clear the canvas
@@ -143,9 +149,11 @@ class MyGame extends engine.Scene {
 
         this.mMinion.update();
         this.mNewMinion.update();
+        this.mNewHero.update();
 
        if(engine.input.isKeyClicked(engine.input.keys.P)){
            this.mNewMinion.freezeState = !this.mNewMinion.freezeState;
+           this.mNewHero.freezeState = !this.mNewHero.freezeState;
        } 
        
         msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo(); 

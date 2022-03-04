@@ -76,6 +76,8 @@ class RTPGameObject extends engine.GameObject {
             this.keyClickedInfo.push('s');
         }else if(engine.input.isKeyClicked(engine.input.keys.D)) {
             this.keyClickedInfo.push('d');
+        }else if(engine.input.isKeyClicked(engine.input.keys.One)) {
+            this.keyClickedInfo.push('1');
         }
 
     }

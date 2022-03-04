@@ -21,7 +21,7 @@ class MoveUp extends RTPGameObjectState {
     }
     update() {
         //moves up for a certain duration
-        console.log("in MoveUp");
+        // console.log("in MoveUp");
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incYPosBy(this.speed);
