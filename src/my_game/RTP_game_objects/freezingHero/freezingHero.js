@@ -6,6 +6,10 @@ import RTPGameObject from "../../../../RealTimePauseAPI/RTPGameObject.js";
 import HeroUpdate from "./freezingHeroUpdate.js";
 import HeroFrozen from "./freezingHeroFrozen.js";
 import MoveToPoint from "../basicStates/moveToPoint.js";
+import MoveUp from "../basicStates/moveUp.js";
+import MoveDown from "../basicStates/moveDown.js";
+import MoveRight from "../basicStates/moveRight.js";
+import MoveLeft from "../basicStates/moveLeft.js";
 class FreezingHero extends RTPGameObject {
     constructor(spriteTexture,atX, atY, ){
         super(null);
@@ -26,6 +30,12 @@ class FreezingHero extends RTPGameObject {
             this.states.push(new MoveToPoint(this.mRenderComponent, .1, [40,20], "2"));
             this.states.push(new MoveToPoint(this.mRenderComponent, .1, [40,60], "3"));
             this.states.push(new MoveToPoint(this.mRenderComponent, .1, [23,0], "4"));
+
+            
+            this.states.push(new MoveUp(this.mRenderComponent,0.5,10,"w"));
+            this.states.push(new MoveDown(this.mRenderComponent,0.5,10,"s"));
+            this.states.push(new MoveRight(this.mRenderComponent,0.5,10,"d"));
+            this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"a"));
 
 
             

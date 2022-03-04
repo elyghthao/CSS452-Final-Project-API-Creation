@@ -26,13 +26,5 @@ class RTPGameObjectState {
     getID() {
         return this.id;
     }
-    start() {
-        
-    }
-    
-
-
-
-
 }
 export default RTPGameObjectState;

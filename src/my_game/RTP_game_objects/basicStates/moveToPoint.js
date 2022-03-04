@@ -46,8 +46,8 @@ class MoveToPoint extends RTPGameObjectState {
         xForm.setYPos(this.interpolateY.get());
 
         // console.log(xForm.getPosition()[0]);
-        if(Math.abs(xForm.getPosition()[0]- this.point[0]) < .5 &&
-            Math.abs(xForm.getPosition()[1] - this.point[1]) < .5) {
+        if(Math.abs(xForm.getPosition()[0]- this.point[0]) < .3 &&
+            Math.abs(xForm.getPosition()[1] - this.point[1]) < .3) {
             // console.log("POP");
             this.pop();
             

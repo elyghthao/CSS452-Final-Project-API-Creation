@@ -10,15 +10,10 @@ class RTPGameObject extends engine.GameObject {
         this.currentState = 0;//initial update state
         this.lastState = 0;
         this.freezeState = false;
-
-        
         this.keyClickedInfo = [];
-
-
         this.keyClicked = false;
         this.keyPressed = false;
         this.keyCommand = false;
-
         this.animateObject = true;
         this.cooldown = null;
         this.start = performance.now();

@@ -45,13 +45,18 @@ class MyGame extends engine.Scene {
     
         this.mMsg = new engine.FontRenderable("Status Message");
         this.mMsg.setColor([0, 0, 0, 1]);
-        this.mMsg.getXform().setPosition(-18, -5);
-        this.mMsg.setTextHeight(2.5);
+        this.mMsg.getXform().setPosition(50, 66);
+        this.mMsg.setTextHeight(2);
 
         this.mTopMsg = new engine.FontRenderable("Status Message");
         this.mTopMsg.setColor([0, 0, 0, 1]);
         this.mTopMsg.getXform().setPosition(-18, -2);
-        this.mTopMsg.setTextHeight(2.5);
+        this.mTopMsg.setTextHeight(2);
+
+        this.mHeroMsg = new engine.FontRenderable("Status Message");
+        this.mHeroMsg.setColor([0, 0, 0, 1]);
+        this.mHeroMsg.getXform().setPosition(-18, -5);
+        this.mHeroMsg.setTextHeight(2);
 
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
@@ -130,6 +135,7 @@ class MyGame extends engine.Scene {
         
         
         this._drawCamera(this.mCamera);
+        this.mHeroMsg.draw(this.mCamera);
         this.mMsg.draw(this.mCamera);   // only draw status in the main camera
         this.mTopMsg.draw(this.mCamera);
 
@@ -146,6 +152,7 @@ class MyGame extends engine.Scene {
     update () {
         let msg = "";
         let topmsg = "";
+        let heromsg = "";
 
         this.mMinion.update();
         this.mNewMinion.update();
@@ -162,6 +169,9 @@ class MyGame extends engine.Scene {
         
 
         topmsg = "Pause State: " + this.mNewMinion.freezeState;
+
+        heromsg = "Hero Input: " + this.mNewHero.getKeysClickedInfo();
+        this.mHeroMsg.setText(heromsg);
         this.mMsg.setText(topmsg);
         this.mTopMsg.setText(msg);
     }
