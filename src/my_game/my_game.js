@@ -58,32 +58,16 @@ class MyGame extends engine.Scene {
         this.mHeroMsg.getXform().setPosition(-18, -5);
         this.mHeroMsg.setTextHeight(2);
 
-        this.mOne = new engine.FontRenderable("Status Message");
-        this.mOne.setColor([1, 0, 0, 1]);
-        this.mOne.getXform().setPosition(30, 30);
-        this.mOne.setTextHeight(2);
-
-        this.mTwo = new engine.FontRenderable("Status Message");
-        this.mTwo.setColor([1, 0, 0, 1]);
-        this.mTwo.getXform().setPosition(40, 20);
-        this.mTwo.setTextHeight(2);
-
-        this.mThree = new engine.FontRenderable("Status Message");
-        this.mThree.setColor([1, 0, 0, 1]);
-        this.mThree.getXform().setPosition(40, 60);
-        this.mThree.setTextHeight(2);
-
-        this.mFour = new engine.FontRenderable("Status Message");
-        this.mFour.setColor([1, 0, 0, 1]);
-        this.mFour.getXform().setPosition(23, 0);
-        this.mFour.setTextHeight(2);
+        
 
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
+        // this.mNewMinion.processKeyPressed();
 
         this.mNewHero = new FreezingHero(this.kMinionSprite,-15,25);
-        this.mNewHero.processKeyClicked();
+        // this.mNewHero.processKeyClicked();
+        // this.mNewHero.processCommands();
 
 
         
@@ -158,10 +142,7 @@ class MyGame extends engine.Scene {
         this.mHeroMsg.draw(this.mCamera);
         this.mMsg.draw(this.mCamera);   // only draw status in the main camera
         this.mTopMsg.draw(this.mCamera);
-        this.mOne.draw(this.mCamera);
-        this.mTwo.draw(this.mCamera);
-        this.mThree.draw(this.mCamera);
-        this.mFour.draw(this.mCamera);
+        
 
         
 
@@ -185,12 +166,21 @@ class MyGame extends engine.Scene {
         this.mNewHero.update();
         // console.log(this.mNewHero.getKeysClickedInfo());
 
-       if(engine.input.isKeyClicked(engine.input.keys.P)){
-           this.mNewMinion.freezeState = !this.mNewMinion.freezeState;
-           this.mNewHero.freezeState = !this.mNewHero.freezeState;
-       } 
+
+
+        if(engine.input.isButtonClicked(engine.input.eMouseButton.eLeft) &&
+        this.mNewHero.isFrozen()){
+            this.mNewHero.insertCommand("MoveToMouse");
+            this.mNewHero.insertCommand([this.mCamera.mouseWCX(), this.mCamera.mouseWCY()]);
+            // this.mNewHero.insertCommand([engine.input.getMousePosX(), engine.input.getMousePosY()]);
+            // this.mNewHero.insertCommand(engine.input.getMousePosY());
+        }
+        if(engine.input.isKeyClicked(engine.input.keys.P)){
+            this.mNewMinion.freezeState = !this.mNewMinion.freezeState;
+            this.mNewHero.freezeState = !this.mNewHero.freezeState;
+        } 
        
-        msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo(); 
+        msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo();  
         // console.log(this.mNewMinion.getKeysClickedInfo());
         
 
@@ -200,10 +190,7 @@ class MyGame extends engine.Scene {
         this.mHeroMsg.setText(heromsg);
         this.mMsg.setText(topmsg);
         this.mTopMsg.setText(msg);
-        this.mOne.setText("1");
-        this.mTwo.setText("2");
-        this.mThree.setText("3");
-        this.mFour.setText("4");
+        
     }
 }
 
