@@ -35,7 +35,7 @@ class MoveToMouseCursorCommand extends RTPGameObjectState {
 
         
         
-        this.mRenderComponent.setColor([1,0,0,1]);
+        // this.mRenderComponent.setColor([1,0,0,1]);
         //moves to where the mouse was
         let xForm = this.mRenderComponent.getXform();
         // console.log("new position is: " + this.newPosition);

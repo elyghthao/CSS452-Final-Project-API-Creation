@@ -28,7 +28,7 @@ class MoveToPoint extends RTPGameObjectState {
     update() {
 
 
-        this.mRenderComponent.setColor([1,0,0,1]);
+        // this.mRenderComponent.setColor([1,0,0,1]);
         //moves to a point
         let xForm = this.mRenderComponent.getXform();
         // console.log("MOVING TO: " + this.point);
