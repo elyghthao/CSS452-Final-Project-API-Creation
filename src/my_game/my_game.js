@@ -2,6 +2,7 @@
 
 import engine from "../engine/index.js";
 import Minion from "./objects/minion.js";
+import FreezingBullet from "./RTP_game_objects/freezingBullet.js/freezingBullet.js";
 import FreezingHero from "./RTP_game_objects/freezingHero/freezingHero.js";
 import FreezingMinion from "./RTP_game_objects/freezingMinion/freezingMinion.js";
 class MyGame extends engine.Scene {
@@ -22,9 +23,17 @@ class MyGame extends engine.Scene {
         this.mCurrentLine = null;
         this.mP1 = null;
 
+        this.mNewLineSet = [];
+
         this.mShowLine = true;
 
         this.mCurrentLine = null;
+        this.currentLinePosition = null;
+
+        this.bulletSet = [];
+
+        this.newBullet = null;
+        this.currentFreezeState = false;
     }
     load() {
         engine.texture.load(this.kMinionSprite);
@@ -65,9 +74,12 @@ class MyGame extends engine.Scene {
         this.mNewMinion.processKeyClicked();
         // this.mNewMinion.processKeyPressed();
 
-        this.mNewHero = new FreezingHero(this.kMinionSprite,-15,25);
-        this.mNewHero.processKeyClicked();
+        this.mNewHero = new FreezingHero(this.kMinionSprite,-15,25, this.bulletSet);
+        // this.mNewHero.processKeyClicked();
         // this.mNewHero.processCommands();
+
+        // this.newBullet = new FreezingBullet([-10, 20]);
+        // this.bulletSet.push(this.newBullet);
 
 
         
@@ -76,22 +88,22 @@ class MyGame extends engine.Scene {
 
 
         this.mOne = new engine.FontRenderable("Status Message");
-        this.mOne.setColor([1, 0, 0, 1]);
+        this.mOne.setColor([0,0,0, 1]);
         this.mOne.getXform().setPosition(30, 30);
         this.mOne.setTextHeight(2);
 
         this.mTwo = new engine.FontRenderable("Status Message");
-        this.mTwo.setColor([1, 0, 0, 1]);
+        this.mTwo.setColor([0,0,0, 1]);
         this.mTwo.getXform().setPosition(40, 20);
         this.mTwo.setTextHeight(2);
 
         this.mThree = new engine.FontRenderable("Status Message");
-        this.mThree.setColor([1, 0, 0, 1]);
+        this.mThree.setColor([0,0,0, 1]);
         this.mThree.getXform().setPosition(40, 60);
         this.mThree.setTextHeight(2);
 
         this.mFour = new engine.FontRenderable("Status Message");
-        this.mFour.setColor([1, 0, 0, 1]);
+        this.mFour.setColor([0,0,0, 1]);
         this.mFour.getXform().setPosition(23, 0);
         this.mFour.setTextHeight(2);
 
@@ -172,9 +184,18 @@ class MyGame extends engine.Scene {
         this.mThree.draw(this.mCamera);
         this.mFour.draw(this.mCamera);
         
-        
-
+        // console.log(this.bulletSet.length);
         let i, l;
+        for (i = 0; i < this.bulletSet.length; i++) {
+            l = this.bulletSet[i];
+            l.draw(this.mCamera);
+        }
+        // console.log(this.mNewLineSet.length);
+        for (i = 0; i < this.mNewLineSet.length; i++) {
+            l = this.mNewLineSet[i];
+            l.draw(this.mCamera);
+        }
+
         for (i = 0; i < this.mLineSet.length; i++) {
             l = this.mLineSet[i];
             l.draw(this.mCamera);
@@ -192,21 +213,107 @@ class MyGame extends engine.Scene {
         this.mMinion.update();
         this.mNewMinion.update();
         this.mNewHero.update();
+        let i, l;
+        for (i = 0; i < this.bulletSet.length; i++) {
+            this.bulletSet[i].update();
+        }
         // console.log(this.mNewHero.getKeysClickedInfo());
 
-
+        if(this.mNewHero.stateInfo.length == 0) {
+            this.currentLinePosition = this.mNewHero.mRenderComponent.getXform().getPosition();
+            this.mNewLineSet.splice(0,this.mNewLineSet.length);
+            // console.log(this.currentLinePosition);
+        }
 
         if(engine.input.isButtonClicked(engine.input.eMouseButton.eLeft) &&
         this.mNewHero.isFrozen()){
             this.mNewHero.insertCommand("MoveToMouse");
-            this.mNewHero.insertCommand([this.mCamera.mouseWCX().toFixed(2), this.mCamera.mouseWCY().toFixed(2)]);
-            // this.mNewHero.insertCommand([engine.input.getMousePosX(), engine.input.getMousePosY()]);
-            // this.mNewHero.insertCommand(engine.input.getMousePosY());
+            this.mNewHero.insertCommand([this.mCamera.mouseWCX().toFixed(1), this.mCamera.mouseWCY().toFixed(1)]);
+
+            this.mCurrentLine = new engine.LineRenderable();
+            this.mCurrentLine.setFirstVertex(this.currentLinePosition[0],this.currentLinePosition[1]);
+            this.mCurrentLine.setPointSize(5.0);
+            this.mCurrentLine.setShowLine(true);
+            this.mCurrentLine.setColor([0,0,1,1]);
+            this.mCurrentLine.setSecondVertex(this.mCamera.mouseWCX().toFixed(1),this.mCamera.mouseWCY().toFixed(1));
+            this.mNewLineSet.push(this.mCurrentLine);
+            this.currentLinePosition = [this.mCamera.mouseWCX().toFixed(2),this.mCamera.mouseWCY().toFixed(2)];
+            
         }
+
+
+        if(engine.input.isButtonClicked(engine.input.eMouseButton.eMiddle) && 
+        this.mNewHero.isFrozen()) {
+
+            let cameraPos = [this.mCamera.mouseWCX().toFixed(1),this.mCamera.mouseWCY().toFixed(1)];
+            this.mNewHero.insertCommand("HeroAttack");
+            this.mNewHero.insertCommand([this.mCamera.mouseWCX().toFixed(1), this.mCamera.mouseWCY().toFixed(1)]);
+
+            //inital position
+            this.mCurrentLine = new engine.LineRenderable();
+            this.mCurrentLine.setFirstVertex(this.currentLinePosition[0],this.currentLinePosition[1]);
+            this.mCurrentLine.setPointSize(5.0);
+            this.mCurrentLine.setShowLine(true);
+            this.mCurrentLine.setColor([0,0,1,1]);
+            this.mCurrentLine.setSecondVertex(cameraPos[0],cameraPos[1]);
+            this.mNewLineSet.push(this.mCurrentLine);
+           
+
+
+
+
+            this.mCurrentLine = new engine.LineRenderable();
+            this.mCurrentLine.setFirstVertex((cameraPos[0] - (-5)),(cameraPos[1] - (-5)));
+            this.mCurrentLine.setPointSize(5.0);
+            this.mCurrentLine.setShowLine(true);
+            this.mCurrentLine.setColor([1,0,0,1]);
+            this.mCurrentLine.setSecondVertex(cameraPos[0] - 5,cameraPos[1] - -5);
+            this.mNewLineSet.push(this.mCurrentLine);
+
+            this.mCurrentLine = new engine.LineRenderable();
+            this.mCurrentLine.setFirstVertex((cameraPos[0] - (-5)),(cameraPos[1] - (-5)));
+            this.mCurrentLine.setPointSize(5.0);
+            this.mCurrentLine.setShowLine(true);
+            this.mCurrentLine.setColor([1,0,0,1]);
+            this.mCurrentLine.setSecondVertex(cameraPos[0] - -5,cameraPos[1] - 5);
+            this.mNewLineSet.push(this.mCurrentLine);
+
+            this.mCurrentLine = new engine.LineRenderable();
+            this.mCurrentLine.setFirstVertex((cameraPos[0] - 5),(cameraPos[1] - (-5)));
+            this.mCurrentLine.setPointSize(5.0);
+            this.mCurrentLine.setShowLine(true);
+            this.mCurrentLine.setColor([1,0,0,1]);
+            this.mCurrentLine.setSecondVertex(cameraPos[0] - 5,cameraPos[1] - 5);
+            this.mNewLineSet.push(this.mCurrentLine);
+
+            this.mCurrentLine = new engine.LineRenderable();
+            this.mCurrentLine.setFirstVertex((cameraPos[0] - 5),(cameraPos[1] - 5));
+            this.mCurrentLine.setPointSize(5.0);
+            this.mCurrentLine.setShowLine(true);
+            this.mCurrentLine.setColor([1,0,0,1]);
+            this.mCurrentLine.setSecondVertex(cameraPos[0] - (-5),cameraPos[1] - 5);
+            this.mNewLineSet.push(this.mCurrentLine);
+
+            
+
+            
+
+
+
+            
+            this.currentLinePosition = [this.mCamera.mouseWCX().toFixed(2),this.mCamera.mouseWCY().toFixed(2)];
+
+        }
+        
         if(engine.input.isKeyClicked(engine.input.keys.P)){
-            this.mNewMinion.freezeState = !this.mNewMinion.freezeState;
-            this.mNewHero.freezeState = !this.mNewHero.freezeState;
+            this.currentFreezeState = !this.currentFreezeState;
         } 
+        this.mNewMinion.freezeState = this.currentFreezeState;
+        this.mNewHero.freezeState = this.currentFreezeState;
+        for (i = 0; i < this.bulletSet.length; i++) {
+            this.bulletSet[i].freezeState = this.currentFreezeState;
+        }
+
        
         msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo();  
         // console.log(this.mNewMinion.getKeysClickedInfo());

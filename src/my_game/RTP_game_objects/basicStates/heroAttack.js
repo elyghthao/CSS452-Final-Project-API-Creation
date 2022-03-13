@@ -2,10 +2,11 @@
 
 import RTPGameObjectState from "../../../../RealTimePauseAPI/RTPGameObjectState.js";
 import engine from "../../../../src/engine/index.js";
+import FreezingBullet from "../freezingBullet.js/freezingBullet.js";
 
 //move up according to how many distance
-class MoveToMouseCursorCommand extends RTPGameObjectState {
-    constructor(mRenderComponent, speed, stateInfo, id) {
+class HeroAttack extends RTPGameObjectState {
+    constructor(mRenderComponent, speed, stateInfo,bulletSet, id) {
         super(mRenderComponent);
         this.speed = speed;
         this.id = id;
@@ -18,6 +19,7 @@ class MoveToMouseCursorCommand extends RTPGameObjectState {
         this.interpolateY = null;
 
         this.newPosition = null;
+        this.bulletSet = bulletSet;
     }
 
     init() {
@@ -33,10 +35,6 @@ class MoveToMouseCursorCommand extends RTPGameObjectState {
     update() {
 
 
-        
-        
-        // this.mRenderComponent.setColor([1,0,0,1]);
-        //moves to where the mouse was
         let xForm = this.mRenderComponent.getXform();
         // console.log("new position is: " + this.newPosition);
         // console.log("current Position is: " + xForm.getPosition());
@@ -44,6 +42,36 @@ class MoveToMouseCursorCommand extends RTPGameObjectState {
         let x,y;
         x = this.newPosition[0];
         y = this.newPosition[1];
+        
+        
+
+        
+        if(Math.abs(xForm.getPosition()[0].toFixed(1)- this.newPosition[0]) < .3 &&
+            Math.abs(xForm.getPosition()[1].toFixed(1) - this.newPosition[1]) < .3) {
+
+            let currentDegree = this.mRenderComponent.getXform().getRotationInDegree().toFixed(0);
+            // console.log(currentDegree);
+            this.mRenderComponent.getXform().incRotationByDegree(10);
+            // console.log(xForm.getPosition()[0], xForm.getPosition()[1]);
+
+
+            if(currentDegree % 40 == 0) {
+                let newBullet = new FreezingBullet([xForm.getPosition()[0].toFixed(1),
+                 xForm.getPosition()[1].toFixed(1)], this.bulletSet);
+                this.bulletSet.push(newBullet);
+                // console.log(this.bulletSet.length);
+            }
+            
+            
+            
+            if(currentDegree > 355) {
+                this.pop();
+            }
+            
+        }else {
+            // this.mRenderComponent.setColor([1,0,0,1]);
+        //moves to where the mouse was
+        
         
 
         this.interpolateX.setFinal(x);
@@ -53,14 +81,6 @@ class MoveToMouseCursorCommand extends RTPGameObjectState {
         this.interpolateY.setFinal(y);
         this.interpolateY.update();
         xForm.setYPos(this.interpolateY.get());
-
-        // console.log(xForm.getPosition()[0]);
-        if(Math.abs(xForm.getPosition()[0].toFixed(1)- this.newPosition[0]) < .3 &&
-            Math.abs(xForm.getPosition()[1].toFixed(1) - this.newPosition[1]) < .3) {
-            // console.log("POP");
-            // this.stateInfo.splice(1,1);
-            this.pop();
-            
         }
     }
 
@@ -71,4 +91,4 @@ class MoveToMouseCursorCommand extends RTPGameObjectState {
 
 }
 
-export default MoveToMouseCursorCommand;
+export default HeroAttack;
