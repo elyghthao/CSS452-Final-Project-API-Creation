@@ -72,14 +72,9 @@ class MyGame extends engine.Scene {
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
-        // this.mNewMinion.processKeyPressed();
+        this.mNewMinion.processKeyPressed();
 
         this.mNewHero = new FreezingHero(this.kMinionSprite,-15,25, this.bulletSet);
-        // this.mNewHero.processKeyClicked();
-        // this.mNewHero.processCommands();
-
-        // this.newBullet = new FreezingBullet([-10, 20]);
-        // this.bulletSet.push(this.newBullet);
 
 
         
@@ -217,6 +212,15 @@ class MyGame extends engine.Scene {
         for (i = 0; i < this.bulletSet.length; i++) {
             this.bulletSet[i].update();
         }
+
+        if(engine.input.isKeyClicked(engine.input.keys.P)){
+            this.currentFreezeState = !this.currentFreezeState;
+        } 
+        this.mNewMinion.freezeState = this.currentFreezeState;
+        this.mNewHero.freezeState = this.currentFreezeState;
+        for (i = 0; i < this.bulletSet.length; i++) {
+            this.bulletSet[i].freezeState = this.currentFreezeState;
+        }
         // console.log(this.mNewHero.getKeysClickedInfo());
 
         if(this.mNewHero.stateInfo.length == 0) {
@@ -305,14 +309,7 @@ class MyGame extends engine.Scene {
 
         }
         
-        if(engine.input.isKeyClicked(engine.input.keys.P)){
-            this.currentFreezeState = !this.currentFreezeState;
-        } 
-        this.mNewMinion.freezeState = this.currentFreezeState;
-        this.mNewHero.freezeState = this.currentFreezeState;
-        for (i = 0; i < this.bulletSet.length; i++) {
-            this.bulletSet[i].freezeState = this.currentFreezeState;
-        }
+        
 
        
         msg = "Minion Input: " + this.mNewMinion.getKeysClickedInfo();  

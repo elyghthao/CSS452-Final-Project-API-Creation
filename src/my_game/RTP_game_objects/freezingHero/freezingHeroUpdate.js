@@ -11,26 +11,14 @@ class HeroUpdate extends RTPGameObjectState {
 
     init() {
         //do nothing for now
-
-
-
-
     }
     update() {
         this.animateObject = true;
         // console.log("in freezing Hero: update");
-        //go right
         let xForm = this.mRenderComponent.getXform();
         // xForm.incXPosBy(.05);
-
-        
         this.heroChangeSize();
         this.mRenderComponent.setColor([1,1,1,0]);
-        
-        
-        
-
-
     }
     heroChangeSize() {
         // console.log(this.shrink);
@@ -43,16 +31,11 @@ class HeroUpdate extends RTPGameObjectState {
         this.lerpSize.update();
         this.mRenderComponent.getXform().setSize(6 * this.lerpSize.get(),
             6* this.lerpSize.get());
-
-
         if(this.mRenderComponent.getXform().getSize()[0] >8.8) {
             this.shrink = true;
         }else if(this.mRenderComponent.getXform().getSize()[0] < 6.2) {
             this.shrink = false;
         }
-        
     }
-
 }
-
 export default HeroUpdate;
