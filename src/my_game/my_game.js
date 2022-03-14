@@ -72,7 +72,7 @@ class MyGame extends engine.Scene {
 
         this.mNewMinion = new FreezingMinion(this.kMinionSprite,-15,60,.2);
         this.mNewMinion.processKeyClicked();
-        this.mNewMinion.processKeyPressed();
+        // this.mNewMinion.processKeyPressed();
 
         this.mNewHero = new FreezingHero(this.kMinionSprite,-15,25, this.bulletSet);
 
