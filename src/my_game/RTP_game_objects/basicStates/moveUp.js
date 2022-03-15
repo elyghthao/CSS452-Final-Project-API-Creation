@@ -15,9 +15,9 @@ class MoveUp extends RTPGameObjectState {
     }
 
     init() {
-        this.isDone = false;
-        let xForm = this.mRenderComponent.getXform();
-        this.finalY = xForm.getPosition()[1] + this.distance;
+        // this.isDone = false;
+        // let xForm = this.mRenderComponent.getXform();
+        // this.finalY = xForm.getPosition()[1] + this.distance;
     }
     update() {
         //moves up for a certain duration
@@ -25,9 +25,10 @@ class MoveUp extends RTPGameObjectState {
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incYPosBy(this.speed);
-        if(xForm.getPosition()[1] >= this.finalY) {
-            this.pop();
-        }
+        // if(xForm.getPosition()[1] >= this.finalY) {
+        //     this.pop();
+        // }
+        this.pop();
     }
 
 }

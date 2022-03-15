@@ -15,9 +15,9 @@ class MoveLeft extends RTPGameObjectState {
     }
 
     init() {
-        this.isDone = false;
-        let xForm = this.mRenderComponent.getXform();
-        this.finalX = xForm.getPosition()[0] - this.distance;
+        // this.isDone = false;
+        // let xForm = this.mRenderComponent.getXform();
+        // this.finalX = xForm.getPosition()[0] - this.distance;
     }
     update() {
         //moves up for a certain duration
@@ -25,9 +25,10 @@ class MoveLeft extends RTPGameObjectState {
         let xForm = this.mRenderComponent.getXform();
         // console.log(xForm.getPosition());
         xForm.incXPosBy(-this.speed);
-        if(xForm.getPosition()[0] <= this.finalX) {
-            this.pop();
-        }
+        // if(xForm.getPosition()[0] <= this.finalX) {
+        //     this.pop();
+        // }
+        this.pop();
     }
 
 }

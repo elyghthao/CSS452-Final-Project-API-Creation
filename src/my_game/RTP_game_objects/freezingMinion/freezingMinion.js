@@ -27,10 +27,10 @@ class FreezingMinion extends RTPGameObject {
         //load in the states here ********IMPORTANT***************
         this.states.push(new MinionUpdate(this.mRenderComponent));
         this.states.push(new MinionFrozen(this.mRenderComponent));
-        this.states.push(new MoveUp(this.mRenderComponent,0.5,10,"w"));
-        this.states.push(new MoveDown(this.mRenderComponent,0.5,10,"s"));
-        this.states.push(new MoveRight(this.mRenderComponent,0.5,10,"d"));
-        this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"a"));
+        this.states.push(new MoveUp(this.mRenderComponent,0.5,10,"!w"));
+        this.states.push(new MoveDown(this.mRenderComponent,0.5,10,"!s"));
+        this.states.push(new MoveRight(this.mRenderComponent,0.5,10,"!d"));
+        this.states.push(new MoveLeft(this.mRenderComponent,0.5,10,"!a"));
 
      
         this.states.push(new MoveToPoint(this.mRenderComponent, .1, [30,30], "1"));
